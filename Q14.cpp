@@ -1,17 +1,20 @@
 #include<iostream>
 using namespace std;
-int n=5;
+const int n=5;
 int q[5];
 int f=-1,r=-1;
-class que{
+class cir{
     public:
 void insert(int data)
 {
-if(r==n-1)
+if((r==n-1 && f==0)||(r+1==f))
 {
-cout<<"\nQ overflow";
+cout<<"\nQ Overflow";
 return;
 }
+if(r==n-1)
+r=0;
+else
 r++;
 q[r]=data;
 if(f==-1)
@@ -20,9 +23,16 @@ f=0;
 int del()
 {
 int data;
+if(f==-1)
+{
+cout<<"\nQ s Underflow";
+return 0;
+}
 data=q[f];
 if(f==r)
-f=r=-1;
+r=f=-1;
+else if(f==n-1)
+f=0;
 else
 f++;
 return data;
@@ -31,11 +41,24 @@ void disp()
 {
 int i;
 if(f==-1)
+{
 cout<<"\nQ is empty";
+return;
+}
 else
+{
+if(f<r)
 {
 for(i=f;i<=r;i++)
 {
+cout<<"\t"<<q[i];
+}
+}
+else
+{
+for(i=f;i<=n-1;i++)
+cout<<"\t"<<q[i];
+for(i=0;i<r;i++)
 cout<<"\t"<<q[i];
 }
 }
@@ -43,9 +66,9 @@ cout<<"\t"<<q[i];
 };
 int main()
 {
-    que q;
+    cir c;
 int ch,e,p;
- cout<<"\n1)Insert";
+cout<<"\n1)Insert";
 cout<<"\n2)Delete";
 cout<<"\n3)Display";
 cout<<"\n4)Exit";
@@ -56,18 +79,18 @@ cin>>ch;
 switch(ch)
 {
 case 1:
-cout<<"\nEnter element : ";
+cout<<"\nEnter element:";
 cin>>e;
-q.insert(e);
-q.disp();
+c.insert(e);
+c.disp();
 break;
 case 2:
-e=q.del();
-cout<<"\nThe deleted element is : "<<e<<endl;
-q.disp();
+e=c.del();
+cout<<"\nThe deleted element is : "<<e;
+c.disp
 break;
 case 3:
-q.disp();
+c.disp();
 break;
 }
 }while(ch!=4);
