@@ -46,7 +46,6 @@ cout<<"Total Bill : "<<total_bill<<endl;
 }
 int main()
 {
-clrscr();
 bill b;
 b.getdata();
 b.calculation();
